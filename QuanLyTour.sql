@@ -132,3 +132,36 @@ insert into HoaDon(HD_tour, HD_nvthu, HD_status) VALUE
     (8, 1,true),
     (9, 1,false),
     (10, 1,false);
+
+
+# //group theo tên điểm du lịch 6 điểm
+select Tour_Diemdulich,DiemDulichName ,TP.TP_name, count(TP.TP_name) as soluong
+from Tour
+         Join DiemDulich DD on Tour.Tour_Diemdulich = DD.DiemDulichID
+         join ThanhPho TP on DD.City = TP.TP_id
+group by Tour_Diemdulich;
+
+
+insert into Tour(Tour_Diemdulich, Tour_LT, Tour_KH, Tourt_StartDate, Tourt_EndDate, Tour_soNguoi, Tour_Price) value
+    (6,1,1,CAST('2021-01-01'as Date),CAST('2021-01-05'as Date),3,50);
+
+
+# //group theo ten thành phố trong điểm du lich( 5 thành phố)
+select Tour_Diemdulich,DiemDulichName ,TP.TP_name, count(TP.TP_name) as soluong
+from Tour
+         Join DiemDulich DD on Tour.Tour_Diemdulich = DD.DiemDulichID
+         join ThanhPho TP on DD.City = TP.TP_id
+group by DD.city;
+
+
+
+select Tourt_StartDate as thang, count(*)as Soluong
+from Tour
+         # where Month(Tourt_StartDate) = 3
+group by Month(Tourt_StartDate)
+having month(thang)=3;
+
+select Tourt_EndDate as thang, count(*)as Soluong
+from Tour
+group by Month(Tourt_EndDate)
+having month(thang)=6;
